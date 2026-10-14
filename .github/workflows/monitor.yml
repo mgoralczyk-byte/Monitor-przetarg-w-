@@ -1,0 +1,33 @@
+name: Monitor Przetargów CPV 19520000-7
+
+on:
+  schedule:
+    # Uruchamiaj codziennie od poniedziałku do piątku o 8:00 rano (czasu UTC: 6:00)
+    - cron: '0 6 * * 1-5'
+  workflow_dispatch: # Pozwala uruchomić sprawdzanie ręcznie przyciskiem
+
+jobs:
+  check-tenders:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pobierz kod
+        uses: actions/checkout@v3
+
+      - name: Skonfiguruj Pythona
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Zainstaluj biblioteki
+        run: pip install requests
+
+      - name: Uruchom skrypt
+        run: python [podejrzany link usunięty]
+
+      - name: Zapisz baze widzianych przetargow
+        run: |
+          git config --global [podejrzany link usunięty] 'GitHub Action Bot'
+          git config --global [podejrzany link usunięty] 'bot@github.com'
+          git add widziane_przetargi.json || true
+          git commit -m "Aktualizacja bazy przetargów" || true
+          git push || true
